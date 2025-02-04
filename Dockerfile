@@ -1,11 +1,11 @@
-# Base completa com ROS 2 Humble Desktop
+# Base com ROS 2 Humble Desktop
 FROM osrf/ros:humble-desktop-full
 
-# Define o ambiente como não interativo
+# Define ambiente não interativo e timezone
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Sao_Paulo
 
-# Instalação de dependências básicas
+# Instala dependências do sistema
 RUN apt-get update && apt-get install -y \
     sudo \
     git \
@@ -34,41 +34,46 @@ RUN apt-get update && apt-get install -y \
     ros-humble-diagnostic-updater \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalação de bibliotecas Python
+# Instala pip e dependências Python
 RUN apt-get update && apt-get install -y python3-pip && \
     pip3 install --no-cache-dir mediapipe numpy opencv-python
 
-# Configuração do diretório de trabalho
-WORKDIR /home/developer/SPWAR_ws
+# Cria o diretório do usuário e configura o ambiente
+RUN mkdir -p /home/developer
+WORKDIR /home/developer
 
-# Copia o conteúdo do workspace
-COPY ./src /home/developer/SPWAR_ws/src
-
-# Instalação do librealsense apenas se necessário
-RUN if [ ! -d "/home/developer/librealsense" ]; then \
-        git clone https://github.com/IntelRealSense/librealsense.git /home/developer/librealsense && \
-        cd /home/developer/librealsense && \
-        mkdir build && cd build && \
+# Clone e compilação do librealsense (essa camada será cacheada após a primeira execução)
+RUN if [ ! -d "librealsense" ]; then \
+        echo "Clonando e compilando librealsense..."; \
+        git clone https://github.com/IntelRealSense/librealsense.git && \
+        cd librealsense && mkdir build && cd build && \
         cmake .. -DBUILD_EXAMPLES=true && \
-        make -j$(nproc) && make install; \
+        make -j$(nproc) && \
+        make install; \
     else \
         echo "librealsense já instalado, pulando compilação."; \
     fi
-    
+
+# Instala a binding do pyrealsense2
 RUN pip3 install pyrealsense2
 
-# Ambiente do ROS
+# Configura o workspace do ROS
+WORKDIR /home/developer/SPWAR_ws
+# Copia o conteúdo do diretório "src" para o workspace
+COPY ./src /home/developer/SPWAR_ws/src
+
+# Troca o shell padrão para bash (para assegurar que o sourcing funcione corretamente)
+SHELL ["/bin/bash", "-c"]
+
+# Compila o workspace. Como essa etapa depende do conteúdo em "src", ela será reexecutada apenas se houver alterações.
+RUN source /opt/ros/humble/setup.bash && \
+    colcon build && \
+    echo "Build do workspace concluído com sucesso!"
+
+# Variáveis de ambiente do ROS e configurações gráficas
 ENV ROS_DISTRO=humble
 ENV DISPLAY=:0
 ENV LIBGL_ALWAYS_INDIRECT=0
 
-# Troca o shell padrão para bash
-SHELL ["/bin/bash", "-c"]
-
-# Compila o workspace
-RUN . /opt/ros/${ROS_DISTRO}/setup.bash && \
-    colcon build && \
-    echo "Build do workspace concluído com sucesso!"
-
-# Comando padrão
+# Comando padrão ao iniciar o container
 CMD ["/bin/bash"]

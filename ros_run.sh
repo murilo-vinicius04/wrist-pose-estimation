@@ -14,7 +14,18 @@ if ! command -v nvidia-smi &>/dev/null; then
     exit 1
 fi
 
-# Executar o container com mapeamento de GPU, display, volumes e dispositivos USB
+# Lista de dispositivos de câmera esperados (por exemplo: /dev/video2 a /dev/video7)
+camera_devices=()
+for video in {2..7}; do
+    device="/dev/video${video}"
+    if [ -e "$device" ]; then
+        camera_devices+=(--device="${device}:${device}")
+    else
+        echo "Aviso: dispositivo ${device} não encontrado. O nó da câmera pode não funcionar corretamente."
+    fi
+done
+
+# Executar o container com mapeamento de GPU, display, volumes e dispositivos USB/câmera (se existirem)
 docker run -it --rm \
     --name "$CONTAINER_NAME" \
     --gpus all \
@@ -24,14 +35,8 @@ docker run -it --rm \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v "$PWD/../SPWAR_ws:/home/developer/SPWAR_ws" \
     -v ~/.ssh:/home/developer/.ssh:ro \
-    --device=/dev/video2:/dev/video2 \
-    --device=/dev/video3:/dev/video3 \
-    --device=/dev/video4:/dev/video4 \
-    --device=/dev/video5:/dev/video5 \
-    --device=/dev/video6:/dev/video6 \
-    --device=/dev/video7:/dev/video7 \
+    "${camera_devices[@]}" \
     "$IMAGE_NAME"
-
 
 # Revogar acesso ao servidor X11 após sair do container
 echo "Revogando acesso ao servidor X11..."
