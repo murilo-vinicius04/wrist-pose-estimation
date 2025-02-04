@@ -1,0 +1,109 @@
+[0.011s] Invoking command in '/home/developer/SPWAR_ws/src/build/spot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/developer/SPWAR_ws/src/build/spot_description -- -j16 -l16
+[0.038s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.140s] -- Found gazebo_ros: 3.7.0 (/opt/ros/humble/share/gazebo_ros/cmake)
+[0.167s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.169s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.174s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.181s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.191s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.218s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.219s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.334s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.397s] -- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+[0.421s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") 
+[0.422s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.426s] -- Searching for dependencies of ignition-math6
+[0.427s] -- Looking for OGRE...
+[0.433s] -- Found Ogre Ghadamon (1.9.0)
+[0.433s] -- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+[0.441s] -- Looking for OGRE_Paging...
+[0.441s] -- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+[0.441s] -- Looking for OGRE_Terrain...
+[0.441s] -- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+[0.441s] -- Looking for OGRE_Property...
+[0.441s] -- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+[0.441s] -- Looking for OGRE_RTShaderSystem...
+[0.441s] -- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+[0.441s] -- Looking for OGRE_Volume...
+[0.441s] -- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+[0.442s] -- Looking for OGRE_Overlay...
+[0.442s] -- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+[0.507s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.507s] -- Looking for ignition-transport8 -- found version 8.2.1
+[0.508s] -- Searching for dependencies of ignition-transport8
+[0.531s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") 
+[0.548s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[0.552s] -- Checking for module 'libzmq >= 4'
+[0.566s] --   Found libzmq , version 4.3.4
+[0.608s] -- Checking for module 'uuid'
+[0.621s] --   Found uuid, version 2.37.2
+[0.654s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[0.655s] -- Searching for dependencies of ignition-msgs5
+[0.678s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.683s] -- Checking for module 'tinyxml2'
+[0.696s] --   Found tinyxml2, version 9.0.0
+[0.730s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[0.731s] -- Looking for ignition-common3 -- found version 3.14.0
+[0.731s] -- Searching for dependencies of ignition-common3
+[0.731s] -- Looking for dlfcn.h - found
+[0.731s] -- Looking for libdl - found
+[0.741s] -- Searching for <ignition-common3> component [graphics]
+[0.741s] -- Looking for ignition-common3-graphics -- found version 3.14.0
+[0.742s] -- Searching for dependencies of ignition-common3-graphics
+[0.742s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.743s] -- Looking for ignition-fuel_tools4 -- found version 4.4.0
+[0.743s] -- Searching for dependencies of ignition-fuel_tools4
+[0.783s] -- Checking for module 'jsoncpp'
+[0.797s] --   Found jsoncpp, version 1.9.5
+[0.836s] -- Checking for module 'libzip'
+[0.849s] --   Found libzip, version 1.7.3
+[0.886s] -- Looking for ignition-common3 -- found version 3.14.0
+[0.886s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.886s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[0.888s] -- Gazebo version: 11.10
+[0.892s] -- Found xacro: 2.0.8 (/opt/ros/humble/share/xacro/cmake)
+[0.946s] -- Configuring done
+[0.952s] -- Generating done
+[0.954s] -- Build files have been written to: /home/developer/SPWAR_ws/src/build/spot_description
+[0.985s] Invoked command in '/home/developer/SPWAR_ws/src/build/spot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/developer/SPWAR_ws/src/build/spot_description -- -j16 -l16
+[1.019s] Invoking command in '/home/developer/SPWAR_ws/src/build/spot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/developer/SPWAR_ws/src/build/spot_description
+[1.027s] -- Install configuration: ""
+[1.027s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/urdf
+[1.027s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/urdf/simple_robot.urdf
+[1.027s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/urdf/spot_with_arm.urdf
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_el0.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_wr1.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_hr0.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_sh0.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/fl_hip_0_geom_visual_mesh.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_fngr.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/lleg_0_geom_visual_mesh.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/fr_hip_0_geom_visual_mesh.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_el1.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/hr_hip_0_geom_visual_mesh.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_wr0.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/base_link_0_geom_visual_mesh.stl
+[1.028s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/l_uleg_0_geom_visual_mesh.stl
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/hl_hip_0_geom_visual_mesh.stl
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_sh1.stl
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/r_uleg_0_geom_visual_mesh.stl
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/launch
+[1.029s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/launch/gazebo.launch.py
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/launch/display.launch.py
+[1.029s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/ament_index/resource_index/package_run_dependencies/spot_description
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/ament_index/resource_index/parent_prefix_path/spot_description
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/ament_prefix_path.sh
+[1.029s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/ament_prefix_path.dsv
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/path.sh
+[1.029s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/path.dsv
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.bash
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.sh
+[1.029s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.zsh
+[1.029s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.dsv
+[1.029s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/package.dsv
+[1.030s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/ament_index/resource_index/packages/spot_description
+[1.030s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/cmake/spot_descriptionConfig.cmake
+[1.030s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/cmake/spot_descriptionConfig-version.cmake
+[1.030s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/package.xml
+[1.032s] Invoked command in '/home/developer/SPWAR_ws/src/build/spot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/developer/SPWAR_ws/src/build/spot_description

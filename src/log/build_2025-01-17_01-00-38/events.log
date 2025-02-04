@@ -1,0 +1,159 @@
+[0.000000] (-) TimerEvent: {}
+[0.000691] (spot_description) JobQueued: {'identifier': 'spot_description', 'dependencies': OrderedDict()}
+[0.000732] (spot_description) JobStarted: {'identifier': 'spot_description'}
+[0.011839] (spot_description) JobProgress: {'identifier': 'spot_description', 'progress': 'cmake'}
+[0.012358] (spot_description) JobProgress: {'identifier': 'spot_description', 'progress': 'build'}
+[0.012893] (spot_description) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/developer/SPWAR_ws/src/build/spot_description', '--', '-j16', '-l16'], 'cwd': '/home/developer/SPWAR_ws/src/build/spot_description', 'env': OrderedDict([('HOSTNAME', '27fe332cc5d7'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/home/developer/SPWAR_ws'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/developer/SPWAR_ws/src/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('TERM', 'xterm'), ('LIBGL_ALWAYS_INDIRECT', '0'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':1'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/home/developer/SPWAR_ws/src/install/spot_description:/opt/ros/humble'), ('DEBIAN_FRONTEND', 'noninteractive'), ('PWD', '/home/developer/SPWAR_ws/src/build/spot_description'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('TZ', 'America/Sao_Paulo'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/developer/SPWAR_ws/src/install/spot_description:/opt/ros/humble')]), 'shell': False}
+[0.040412] (spot_description) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.099811] (-) TimerEvent: {}
+[0.143704] (spot_description) StdoutLine: {'line': b'-- Found gazebo_ros: 3.7.0 (/opt/ros/humble/share/gazebo_ros/cmake)\n'}
+[0.199924] (-) TimerEvent: {}
+[0.211132] (spot_description) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.218489] (spot_description) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.230730] (spot_description) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.247647] (spot_description) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.267784] (spot_description) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.300031] (-) TimerEvent: {}
+[0.323727] (spot_description) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.327518] (spot_description) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.400128] (-) TimerEvent: {}
+[0.430546] (spot_description) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[0.461959] (spot_description) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[0.500217] (-) TimerEvent: {}
+[0.512325] (spot_description) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.526798] (spot_description) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[0.600322] (-) TimerEvent: {}
+[0.634126] (spot_description) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[0.634383] (spot_description) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[0.700418] (-) TimerEvent: {}
+[0.709050] (spot_description) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[0.710123] (spot_description) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[0.774672] (spot_description) StdoutLine: {'line': b'-- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") \n'}
+[0.775612] (spot_description) StdoutLine: {'line': b"-- Checking for module 'bullet>=2.82'\n"}
+[0.788369] (spot_description) StdoutLine: {'line': b'--   Found bullet, version 3.05\n'}
+[0.800494] (-) TimerEvent: {}
+[0.900717] (-) TimerEvent: {}
+[0.908912] (spot_description) StdoutLine: {'line': b'-- Found fcl: /usr/include (found suitable version "0.7.0", minimum required is "0.5.0") \n'}
+[0.958076] (spot_description) StdoutLine: {'line': b'-- Found assimp: /usr/include (found version "5.2.0") \n'}
+[0.986329] (spot_description) StdoutLine: {'line': b'-- Found DART: /usr/include (Required is at least version "6.6") found components: dart \n'}
+[1.000801] (-) TimerEvent: {}
+[1.020491] (spot_description) StdoutLine: {'line': b'-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found suitable version "1.74.0", minimum required is "1.40.0") found components: thread system filesystem program_options regex iostreams date_time \n'}
+[1.041276] (spot_description) StdoutLine: {'line': b'-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") \n'}
+[1.049110] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.1\n'}
+[1.057979] (spot_description) StdoutLine: {'line': b'-- Searching for dependencies of ignition-math6\n'}
+[1.059931] (spot_description) StdoutLine: {'line': b'-- Looking for OGRE...\n'}
+[1.060237] (spot_description) StdoutLine: {'line': b'-- OGRE_PREFIX_WATCH changed.\n'}
+[1.065055] (spot_description) StdoutLine: {'line': b"-- Checking for module 'OGRE'\n"}
+[1.077763] (spot_description) StdoutLine: {'line': b'--   Found OGRE, version 1.9.0\n'}
+[1.100892] (-) TimerEvent: {}
+[1.111324] (spot_description) StdoutLine: {'line': b'-- Found Ogre Ghadamon (1.9.0)\n'}
+[1.117082] (spot_description) StdoutLine: {'line': b'-- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so\n'}
+[1.125667] (spot_description) StdoutLine: {'line': b'-- Looking for OGRE_Paging...\n'}
+[1.129070] (spot_description) StdoutLine: {'line': b'-- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so\n'}
+[1.129175] (spot_description) StdoutLine: {'line': b'-- Looking for OGRE_Terrain...\n'}
+[1.132670] (spot_description) StdoutLine: {'line': b'-- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so\n'}
+[1.132783] (spot_description) StdoutLine: {'line': b'-- Looking for OGRE_Property...\n'}
+[1.135822] (spot_description) StdoutLine: {'line': b'-- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so\n'}
+[1.135945] (spot_description) StdoutLine: {'line': b'-- Looking for OGRE_RTShaderSystem...\n'}
+[1.139209] (spot_description) StdoutLine: {'line': b'-- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so\n'}
+[1.139289] (spot_description) StdoutLine: {'line': b'-- Looking for OGRE_Volume...\n'}
+[1.142930] (spot_description) StdoutLine: {'line': b'-- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so\n'}
+[1.143007] (spot_description) StdoutLine: {'line': b'-- Looking for OGRE_Overlay...\n'}
+[1.146378] (spot_description) StdoutLine: {'line': b'-- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so\n'}
+[1.201003] (-) TimerEvent: {}
+[1.220209] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.1\n'}
+[1.223785] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-transport8 -- found version 8.2.1\n'}
+[1.224305] (spot_description) StdoutLine: {'line': b'-- Searching for dependencies of ignition-transport8\n'}
+[1.247621] (spot_description) StdoutLine: {'line': b'-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") \n'}
+[1.264220] (spot_description) StdoutLine: {'line': b'-- Config-file not installed for ZeroMQ -- checking for pkg-config\n'}
+[1.268721] (spot_description) StdoutLine: {'line': b"-- Checking for module 'libzmq >= 4'\n"}
+[1.283168] (spot_description) StdoutLine: {'line': b'--   Found libzmq , version 4.3.4\n'}
+[1.301085] (-) TimerEvent: {}
+[1.320694] (spot_description) StdoutLine: {'line': b'-- Found ZeroMQ: TRUE (Required is at least version "4") \n'}
+[1.326452] (spot_description) StdoutLine: {'line': b"-- Checking for module 'uuid'\n"}
+[1.339216] (spot_description) StdoutLine: {'line': b'--   Found uuid, version 2.37.2\n'}
+[1.372946] (spot_description) StdoutLine: {'line': b'-- Found UUID: TRUE  \n'}
+[1.376304] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-msgs5 -- found version 5.8.1\n'}
+[1.376732] (spot_description) StdoutLine: {'line': b'-- Searching for dependencies of ignition-msgs5\n'}
+[1.399995] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.1\n'}
+[1.401166] (-) TimerEvent: {}
+[1.405074] (spot_description) StdoutLine: {'line': b"-- Checking for module 'tinyxml2'\n"}
+[1.417786] (spot_description) StdoutLine: {'line': b'--   Found tinyxml2, version 9.0.0\n'}
+[1.452199] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-msgs5 -- found version 5.8.1\n'}
+[1.455469] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-common3 -- found version 3.14.0\n'}
+[1.456029] (spot_description) StdoutLine: {'line': b'-- Searching for dependencies of ignition-common3\n'}
+[1.456623] (spot_description) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[1.457234] (spot_description) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[1.458513] (spot_description) StdoutLine: {'line': b'-- Found DL: TRUE  \n'}
+[1.469599] (spot_description) StdoutLine: {'line': b'-- Found tinyobjloader: /usr/lib/x86_64-linux-gnu/cmake/tinyobjloader/tinyobjloader-config.cmake (found version "2.0.0") \n'}
+[1.470148] (spot_description) StdoutLine: {'line': b'-- Searching for <ignition-common3> component [graphics]\n'}
+[1.473376] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-common3-graphics -- found version 3.14.0\n'}
+[1.473834] (spot_description) StdoutLine: {'line': b'-- Searching for dependencies of ignition-common3-graphics\n'}
+[1.474141] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.1\n'}
+[1.477861] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-fuel_tools4 -- found version 4.4.0\n'}
+[1.478228] (spot_description) StdoutLine: {'line': b'-- Searching for dependencies of ignition-fuel_tools4\n'}
+[1.501250] (-) TimerEvent: {}
+[1.561152] (spot_description) StdoutLine: {'line': b'-- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "7.81.0")  \n'}
+[1.571480] (spot_description) StdoutLine: {'line': b"-- Checking for module 'jsoncpp'\n"}
+[1.584664] (spot_description) StdoutLine: {'line': b'--   Found jsoncpp, version 1.9.5\n'}
+[1.601338] (-) TimerEvent: {}
+[1.618489] (spot_description) StdoutLine: {'line': b'-- Found JSONCPP: TRUE  \n'}
+[1.623792] (spot_description) StdoutLine: {'line': b"-- Checking for module 'libzip'\n"}
+[1.636566] (spot_description) StdoutLine: {'line': b'--   Found libzip, version 1.7.3\n'}
+[1.671143] (spot_description) StdoutLine: {'line': b'-- Found ZIP: TRUE  \n'}
+[1.671544] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-common3 -- found version 3.14.0\n'}
+[1.671871] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.1\n'}
+[1.672193] (spot_description) StdoutLine: {'line': b'-- Looking for ignition-msgs5 -- found version 5.8.1\n'}
+[1.676782] (spot_description) StdoutLine: {'line': b'-- Gazebo version: 11.10\n'}
+[1.677063] (spot_description) StdoutLine: {'line': b"-- Checking for module 'tbb'\n"}
+[1.690114] (spot_description) StdoutLine: {'line': b'--   Found tbb, version 2021.5.0\n'}
+[1.701410] (-) TimerEvent: {}
+[1.774902] (spot_description) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.781613] (spot_description) StdoutLine: {'line': b'-- Generating done\n'}
+[1.783578] (spot_description) StdoutLine: {'line': b'-- Build files have been written to: /home/developer/SPWAR_ws/src/build/spot_description\n'}
+[1.801534] (-) TimerEvent: {}
+[1.808558] (spot_description) CommandEnded: {'returncode': 0}
+[1.831677] (spot_description) JobProgress: {'identifier': 'spot_description', 'progress': 'install'}
+[1.840667] (spot_description) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/developer/SPWAR_ws/src/build/spot_description'], 'cwd': '/home/developer/SPWAR_ws/src/build/spot_description', 'env': OrderedDict([('HOSTNAME', '27fe332cc5d7'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/home/developer/SPWAR_ws'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/developer/SPWAR_ws/src/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('TERM', 'xterm'), ('LIBGL_ALWAYS_INDIRECT', '0'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':1'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/home/developer/SPWAR_ws/src/install/spot_description:/opt/ros/humble'), ('DEBIAN_FRONTEND', 'noninteractive'), ('PWD', '/home/developer/SPWAR_ws/src/build/spot_description'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('TZ', 'America/Sao_Paulo'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/developer/SPWAR_ws/src/install/spot_description:/opt/ros/humble')]), 'shell': False}
+[1.847335] (spot_description) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[1.847485] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/urdf\n'}
+[1.847585] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/urdf/simple_robot.urdf\n'}
+[1.847651] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/urdf/spot_with_arm.urdf\n'}
+[1.847710] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes\n'}
+[1.847820] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_el0.stl\n'}
+[1.847887] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_wr1.stl\n'}
+[1.847967] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_hr0.stl\n'}
+[1.848022] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_sh0.stl\n'}
+[1.848078] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/fl_hip_0_geom_visual_mesh.stl\n'}
+[1.848133] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_fngr.stl\n'}
+[1.848186] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/lleg_0_geom_visual_mesh.stl\n'}
+[1.848260] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/fr_hip_0_geom_visual_mesh.stl\n'}
+[1.848308] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_el1.stl\n'}
+[1.848350] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/hr_hip_0_geom_visual_mesh.stl\n'}
+[1.848397] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_wr0.stl\n'}
+[1.848455] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/base_link_0_geom_visual_mesh.stl\n'}
+[1.848511] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/l_uleg_0_geom_visual_mesh.stl\n'}
+[1.848595] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/hl_hip_0_geom_visual_mesh.stl\n'}
+[1.848637] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_sh1.stl\n'}
+[1.848690] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/r_uleg_0_geom_visual_mesh.stl\n'}
+[1.848735] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/launch\n'}
+[1.848781] (spot_description) StdoutLine: {'line': b'-- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/launch/gazebo.launch.py\n'}
+[1.848826] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/launch/display.launch.py\n'}
+[1.848870] (spot_description) StdoutLine: {'line': b'-- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/ament_index/resource_index/package_run_dependencies/spot_description\n'}
+[1.848941] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/ament_index/resource_index/parent_prefix_path/spot_description\n'}
+[1.848986] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/ament_prefix_path.sh\n'}
+[1.849041] (spot_description) StdoutLine: {'line': b'-- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/ament_prefix_path.dsv\n'}
+[1.849086] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/path.sh\n'}
+[1.849150] (spot_description) StdoutLine: {'line': b'-- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/path.dsv\n'}
+[1.849253] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.bash\n'}
+[1.849316] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.sh\n'}
+[1.849381] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.zsh\n'}
+[1.849453] (spot_description) StdoutLine: {'line': b'-- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.dsv\n'}
+[1.849619] (spot_description) StdoutLine: {'line': b'-- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/package.dsv\n'}
+[1.849825] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/ament_index/resource_index/packages/spot_description\n'}
+[1.849894] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/cmake/spot_descriptionConfig.cmake\n'}
+[1.849972] (spot_description) StdoutLine: {'line': b'-- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/cmake/spot_descriptionConfig-version.cmake\n'}
+[1.850023] (spot_description) StdoutLine: {'line': b'-- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/package.xml\n'}
+[1.851648] (spot_description) CommandEnded: {'returncode': 0}
+[1.891667] (spot_description) JobEnded: {'identifier': 'spot_description', 'rc': 0}
+[1.892352] (-) EventReactorShutdown: {}

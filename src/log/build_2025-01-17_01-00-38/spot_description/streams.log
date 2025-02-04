@@ -1,0 +1,133 @@
+[0.013s] Invoking command in '/home/developer/SPWAR_ws/src/build/spot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/developer/SPWAR_ws/src/build/spot_description -- -j16 -l16
+[0.040s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.143s] -- Found gazebo_ros: 3.7.0 (/opt/ros/humble/share/gazebo_ros/cmake)
+[0.210s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.218s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.230s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.247s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.267s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.323s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.327s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.430s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.461s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.512s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.526s] -- Looking for pthread.h
+[0.634s] -- Looking for pthread.h - found
+[0.634s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.708s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.709s] -- Found Threads: TRUE  
+[0.774s] -- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") 
+[0.775s] -- Checking for module 'bullet>=2.82'
+[0.788s] --   Found bullet, version 3.05
+[0.908s] -- Found fcl: /usr/include (found suitable version "0.7.0", minimum required is "0.5.0") 
+[0.957s] -- Found assimp: /usr/include (found version "5.2.0") 
+[0.986s] -- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+[1.020s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found suitable version "1.74.0", minimum required is "1.40.0") found components: thread system filesystem program_options regex iostreams date_time 
+[1.041s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") 
+[1.048s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.057s] -- Searching for dependencies of ignition-math6
+[1.059s] -- Looking for OGRE...
+[1.060s] -- OGRE_PREFIX_WATCH changed.
+[1.064s] -- Checking for module 'OGRE'
+[1.077s] --   Found OGRE, version 1.9.0
+[1.111s] -- Found Ogre Ghadamon (1.9.0)
+[1.116s] -- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+[1.125s] -- Looking for OGRE_Paging...
+[1.128s] -- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+[1.128s] -- Looking for OGRE_Terrain...
+[1.132s] -- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+[1.132s] -- Looking for OGRE_Property...
+[1.135s] -- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+[1.135s] -- Looking for OGRE_RTShaderSystem...
+[1.139s] -- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+[1.139s] -- Looking for OGRE_Volume...
+[1.142s] -- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+[1.142s] -- Looking for OGRE_Overlay...
+[1.146s] -- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+[1.220s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.223s] -- Looking for ignition-transport8 -- found version 8.2.1
+[1.224s] -- Searching for dependencies of ignition-transport8
+[1.247s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") 
+[1.264s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[1.268s] -- Checking for module 'libzmq >= 4'
+[1.283s] --   Found libzmq , version 4.3.4
+[1.320s] -- Found ZeroMQ: TRUE (Required is at least version "4") 
+[1.326s] -- Checking for module 'uuid'
+[1.339s] --   Found uuid, version 2.37.2
+[1.372s] -- Found UUID: TRUE  
+[1.376s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.376s] -- Searching for dependencies of ignition-msgs5
+[1.399s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.404s] -- Checking for module 'tinyxml2'
+[1.417s] --   Found tinyxml2, version 9.0.0
+[1.452s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.455s] -- Looking for ignition-common3 -- found version 3.14.0
+[1.455s] -- Searching for dependencies of ignition-common3
+[1.456s] -- Looking for dlfcn.h - found
+[1.457s] -- Looking for libdl - found
+[1.458s] -- Found DL: TRUE  
+[1.469s] -- Found tinyobjloader: /usr/lib/x86_64-linux-gnu/cmake/tinyobjloader/tinyobjloader-config.cmake (found version "2.0.0") 
+[1.469s] -- Searching for <ignition-common3> component [graphics]
+[1.473s] -- Looking for ignition-common3-graphics -- found version 3.14.0
+[1.473s] -- Searching for dependencies of ignition-common3-graphics
+[1.473s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.477s] -- Looking for ignition-fuel_tools4 -- found version 4.4.0
+[1.478s] -- Searching for dependencies of ignition-fuel_tools4
+[1.561s] -- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "7.81.0")  
+[1.571s] -- Checking for module 'jsoncpp'
+[1.584s] --   Found jsoncpp, version 1.9.5
+[1.618s] -- Found JSONCPP: TRUE  
+[1.623s] -- Checking for module 'libzip'
+[1.636s] --   Found libzip, version 1.7.3
+[1.671s] -- Found ZIP: TRUE  
+[1.671s] -- Looking for ignition-common3 -- found version 3.14.0
+[1.671s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.671s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.676s] -- Gazebo version: 11.10
+[1.676s] -- Checking for module 'tbb'
+[1.689s] --   Found tbb, version 2021.5.0
+[1.774s] -- Configuring done
+[1.781s] -- Generating done
+[1.783s] -- Build files have been written to: /home/developer/SPWAR_ws/src/build/spot_description
+[1.808s] Invoked command in '/home/developer/SPWAR_ws/src/build/spot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/developer/SPWAR_ws/src/build/spot_description -- -j16 -l16
+[1.840s] Invoking command in '/home/developer/SPWAR_ws/src/build/spot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/developer/SPWAR_ws/src/build/spot_description
+[1.847s] -- Install configuration: ""
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/urdf
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/urdf/simple_robot.urdf
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/urdf/spot_with_arm.urdf
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_el0.stl
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_wr1.stl
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_hr0.stl
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_sh0.stl
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/fl_hip_0_geom_visual_mesh.stl
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_fngr.stl
+[1.847s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/lleg_0_geom_visual_mesh.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/fr_hip_0_geom_visual_mesh.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_el1.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/hr_hip_0_geom_visual_mesh.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_wr0.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/base_link_0_geom_visual_mesh.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/l_uleg_0_geom_visual_mesh.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/hl_hip_0_geom_visual_mesh.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/arm0.link_sh1.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/meshes/r_uleg_0_geom_visual_mesh.stl
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/launch
+[1.848s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/launch/gazebo.launch.py
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/launch/display.launch.py
+[1.848s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/ament_index/resource_index/package_run_dependencies/spot_description
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/ament_index/resource_index/parent_prefix_path/spot_description
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/ament_prefix_path.sh
+[1.848s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/ament_prefix_path.dsv
+[1.848s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/path.sh
+[1.848s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/environment/path.dsv
+[1.849s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.bash
+[1.849s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.sh
+[1.849s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.zsh
+[1.849s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/local_setup.dsv
+[1.849s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/package.dsv
+[1.849s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/ament_index/resource_index/packages/spot_description
+[1.849s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/cmake/spot_descriptionConfig.cmake
+[1.849s] -- Up-to-date: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/cmake/spot_descriptionConfig-version.cmake
+[1.849s] -- Installing: /home/developer/SPWAR_ws/src/install/spot_description/share/spot_description/package.xml
+[1.851s] Invoked command in '/home/developer/SPWAR_ws/src/build/spot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/developer/SPWAR_ws/src/build/spot_description
