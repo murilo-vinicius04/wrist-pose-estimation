@@ -25,8 +25,9 @@ setup(
             'blazepose_node = blazepose_right_arm_3d.blazepose_right_arm_3d_node:main',
             'pointcloud_test = blazepose_right_arm_3d.pointcloud_test:main',
             'right_arm_viewer = blazepose_right_arm_3d.right_arm_viewer:main',
-            'human_to_robot_tf = blazepose_right_arm_3d.tf2:main',
+            'wrist_transform_node = blazepose_right_arm_3d.tf2:main',
             'blazepose_3d = blazepose_right_arm_3d.blazepose_map3d:main',
+            'calibration_node = blazepose_right_arm_3d.calibration:main',
         ],
     },
 )

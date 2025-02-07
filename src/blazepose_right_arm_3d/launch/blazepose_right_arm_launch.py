@@ -27,14 +27,6 @@ def generate_launch_description():
             }.items()
         ),
 
-        # 🤖 Nó do BlazePose para o braço direito em 3D
-        Node(
-            package='blazepose_right_arm_3d',
-            executable='blazepose_node',
-            name='blazepose_right_arm_3d_node',
-            output='screen'
-        ),
-
         # 🦾 Visualizador do braço direito
         Node(
             package='blazepose_right_arm_3d',
@@ -43,11 +35,12 @@ def generate_launch_description():
             output='screen'
         ),
 
-        # 📍 Mapeamento 3D do BlazePose
+        # Novo nó blazepose_3d
         Node(
             package='blazepose_right_arm_3d',
             executable='blazepose_3d',
             name='blazepose_3d_node',
             output='screen'
-        )
+        ),
+
     ])
