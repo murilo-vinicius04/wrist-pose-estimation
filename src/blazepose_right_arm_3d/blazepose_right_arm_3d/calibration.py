@@ -3,13 +3,13 @@ from rclpy.node import Node
 from geometry_msgs.msg import PointStamped, TransformStamped
 import tf2_ros
 import numpy as np
-import tf_transformations
+from transforms3d.quaternions import mat2quat  # Import the new library function
 
 class CalibrationNode(Node):
     def __init__(self):
         super().__init__('calibration_node')
         
-        # Inscreve-se no tópico que envia a posição 3D do pulso
+        # Subscribe to the topic that sends the 3D wrist position
         self.sub_wrist = self.create_subscription(
             PointStamped,
             '/blazepose/right_wrist_3d',
@@ -18,85 +18,85 @@ class CalibrationNode(Node):
         )
         self.latest_wrist = None
 
-        # Variáveis de estado da calibração
-        self.calib_count = 0  # Indica em qual etapa da calibração estamos (0: origem, 1: eixo X, 2: eixo Y, 3: eixo Z)
+        # Calibration state variables:
+        # 0: origin, 1: X-axis, 2: Y-axis, 3: Z-axis
+        self.calib_count = 0  
         self.origin_cam = None
         self.x_axis_cam = None
         self.y_axis_cam = None
         self.z_axis_cam = None
 
-        # Objeto para publicação de transformada estática
+        # Object for publishing static transform
         self.tf_broadcaster = tf2_ros.StaticTransformBroadcaster(self)
-        self.get_logger().info("Nó de calibração inicializado.")
+        self.get_logger().info("Calibration node initialized.")
 
-        # Intervalo (em segundos) entre cada etapa da calibração
+        # Interval (in seconds) between calibration steps
         self.step_interval = 5.0
 
-        # Inicia o procedimento de calibração: o usuário deverá posicionar o pulso conforme a instrução
+        # Start calibration procedure
         self.get_logger().info(
-            f"[PASSO 0] Posicione o pulso na posição ORIGEM. A calibração será executada automaticamente em {self.step_interval} segundos."
+            f"[STEP 0] Place the wrist at the ORIGIN. Calibration will execute automatically in {self.step_interval} seconds."
         )
         self.schedule_next_step()
 
     def wrist_callback(self, msg: PointStamped):
-        # Atualiza a posição mais recente do pulso
+        # Update the latest wrist position
         self.latest_wrist = msg.point
 
     def schedule_next_step(self):
         """
-        Agenda a próxima etapa da calibração utilizando um timer que dispara apenas uma vez.
+        Schedules the next calibration step using a one-shot timer.
         """
-        # Cria um timer que chamará o callback após 'step_interval' segundos
         self.timer = self.create_timer(self.step_interval, self.calibration_timer_callback)
 
     def calibration_timer_callback(self):
-        # Cancela o timer para garantir que ele seja executado apenas uma vez (one-shot)
+        # Cancel the timer to ensure a one-shot execution
         self.timer.cancel()
 
         if self.latest_wrist is None:
-            self.get_logger().warn("Nenhum dado do pulso recebido. Verifique o sensor e posicione o pulso corretamente.")
-            # Reagenda a mesma etapa
+            self.get_logger().warn("No wrist data received. Check the sensor and position the wrist correctly.")
+            # Reschedule the same step
             self.schedule_next_step()
             return
 
-        # Executa a etapa de calibração conforme o contador
+        # Execute the calibration step based on the counter
         if self.calib_count == 0:
             self.origin_cam = self.latest_wrist
             self.get_logger().info(
-                f"[PASSO 1] Origem armazenada. Agora, mova a mão para a posição FRONTAL (eixo X). A calibração será executada em {self.step_interval} segundos."
+                f"[STEP 1] Origin stored. Now, move the hand to the FRONTAL position (X-axis). Calibration will execute in {self.step_interval} seconds."
             )
         elif self.calib_count == 1:
             self.x_axis_cam = self.latest_wrist
             self.get_logger().info(
-                f"[PASSO 2] Eixo X armazenado. Agora, mova a mão para a posição LATERAL (eixo Y). A calibração será executada em {self.step_interval} segundos."
+                f"[STEP 2] X-axis stored. Now, move the hand to the LATERAL position (Y-axis). Calibration will execute in {self.step_interval} seconds."
             )
         elif self.calib_count == 2:
             self.y_axis_cam = self.latest_wrist
             self.get_logger().info(
-                f"[PASSO 3] Eixo Y armazenado. Agora, mova a mão para a posição VERTICAL (eixo Z). A calibração será executada em {self.step_interval} segundos."
+                f"[STEP 3] Y-axis stored. Now, move the hand to the VERTICAL position (Z-axis). Calibration will execute in {self.step_interval} seconds."
             )
         elif self.calib_count == 3:
             self.z_axis_cam = self.latest_wrist
-            # Após a última etapa, calcula e publica a transformação
+            # After the final step, compute and publish the transform
             self.compute_and_broadcast_transform()
-            self.get_logger().info("Calibração completa!")
-            self.calib_count = 0  # Se desejar, pode reiniciar o processo aqui
+            self.get_logger().info("Calibration complete!")
+            self.calib_count = 0  # Optionally restart the process
             return
         else:
-            self.get_logger().error("Estado de calibração inesperado.")
+            self.get_logger().error("Unexpected calibration state.")
             self.calib_count = 0
             return
 
-        # Incrementa o contador e agenda a próxima etapa
+        # Increment the step counter and schedule the next step
         self.calib_count += 1
         self.schedule_next_step()
 
     def compute_and_broadcast_transform(self):
         """
-        Calcula a matriz de rotação e a translação a partir dos pontos de calibração
-        e publica a transformação.
+        Calculates the rotation matrix and translation vector from the calibration points
+        and publishes the transform.
         """
-        # Calcula os vetores base a partir das diferenças dos pontos
+        # Compute base vectors from the differences of the calibration points
         u = np.array([
             self.x_axis_cam.x - self.origin_cam.x,
             self.x_axis_cam.y - self.origin_cam.y,
@@ -113,29 +113,26 @@ class CalibrationNode(Node):
             self.z_axis_cam.z - self.origin_cam.z
         ])
 
-        # Orthogonaliza os vetores utilizando o processo de Gram-Schmidt
+        # Orthonormalize the vectors using the Gram-Schmidt process
         u = u / np.linalg.norm(u)
         v = v - np.dot(v, u) * u
         v = v / np.linalg.norm(v)
         w = w - np.dot(w, u) * u - np.dot(w, v) * v
         w = w / np.linalg.norm(w)
 
-        # Cria a matriz de rotação com as colunas correspondentes aos vetores ortonormais
+        # Create the rotation matrix with columns as the orthonormal basis vectors
         R = np.column_stack((u, v, w))
 
-        # Converte a matriz de rotação para um quaternion
-        quat = tf_transformations.quaternion_from_matrix([
-            [R[0, 0], R[0, 1], R[0, 2], 0],
-            [R[1, 0], R[1, 1], R[1, 2], 0],
-            [R[2, 0], R[2, 1], R[2, 2], 0],
-            [0,       0,       0,       1]
-        ])
+        # Convert the 3x3 rotation matrix to a quaternion.
+        # mat2quat returns (w, x, y, z); we need to reorder to (x, y, z, w) for ROS.
+        quat = mat2quat(R)
+        quat_ros = [quat[1], quat[2], quat[3], quat[0]]
 
-        # Calcula a translação: a origem do sistema no referencial do robô
+        # Compute the translation: transform the origin to the new frame
         rotated_origin = R.T @ np.array([self.origin_cam.x, self.origin_cam.y, self.origin_cam.z])
         trans = -rotated_origin
 
-        # Prepara a mensagem de transformada
+        # Prepare the transform message
         transform = TransformStamped()
         transform.header.stamp = self.get_clock().now().to_msg()
         transform.header.frame_id = "camera_color_optical_frame"
@@ -143,12 +140,12 @@ class CalibrationNode(Node):
         transform.transform.translation.x = float(trans[0])
         transform.transform.translation.y = float(trans[1])
         transform.transform.translation.z = float(trans[2])
-        transform.transform.rotation.x = float(quat[0])
-        transform.transform.rotation.y = float(quat[1])
-        transform.transform.rotation.z = float(quat[2])
-        transform.transform.rotation.w = float(quat[3])
+        transform.transform.rotation.x = float(quat_ros[0])
+        transform.transform.rotation.y = float(quat_ros[1])
+        transform.transform.rotation.z = float(quat_ros[2])
+        transform.transform.rotation.w = float(quat_ros[3])
 
-        # Publica a transformada
+        # Broadcast the static transform
         self.tf_broadcaster.sendTransform(transform)
 
 def main(args=None):

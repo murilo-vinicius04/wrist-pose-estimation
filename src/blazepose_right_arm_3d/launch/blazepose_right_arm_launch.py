@@ -27,13 +27,13 @@ def generate_launch_description():
             }.items()
         ),
 
-        # 🦾 Visualizador do braço direito
-        Node(
-            package='blazepose_right_arm_3d',
-            executable='right_arm_viewer',
-            name='right_arm_viewer_node',
-            output='screen'
-        ),
+        # # 🦾 Visualizador do braço direito
+        # Node(
+        #     package='blazepose_right_arm_3d',
+        #     executable='right_arm_viewer',
+        #     name='right_arm_viewer_node',
+        #     output='screen'
+        # ),
 
         # Novo nó blazepose_3d
         Node(

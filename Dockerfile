@@ -57,6 +57,8 @@ RUN if [ ! -d "librealsense" ]; then \
 # Instala a binding do pyrealsense2
 RUN pip3 install pyrealsense2
 
+RUN pip3 install transforms3d
+
 # Configura o workspace do ROS
 WORKDIR /home/developer/SPWAR_ws
 # Copia o conteúdo do diretório "src" para o workspace
