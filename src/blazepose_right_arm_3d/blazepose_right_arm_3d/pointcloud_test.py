@@ -1,158 +1,108 @@
 #!/usr/bin/env python3
-
 import rclpy
 from rclpy.node import Node
-from sensor_msgs.msg import Image
-from geometry_msgs.msg import Pose2D, Point
-from cv_bridge import CvBridge
-import threading
-import time
 
-class DepthWristSubscriber(Node):
+from sensor_msgs.msg import Image
+from geometry_msgs.msg import PointStamped
+
+from cv_bridge import CvBridge
+import cv2
+import mediapipe as mp
+import numpy as np
+
+from collections import deque
+
+class MediapipeWrist3DNode(Node):
     def __init__(self):
-        super().__init__('depth_wrist_subscriber')
+        super().__init__('mediapipe_wrist_3d_node')
+
+        # Inscrição na imagem de cor da RealSense
+        self.subscription = self.create_subscription(
+            Image,
+            '/camera/camera/color/image_raw',
+            self.image_callback,
+            10)
+        self.subscription  # evita aviso de variável não utilizada
+
+        # Publicador para a posição 3D do wrist
+        self.pub_wrist_3d = self.create_publisher(PointStamped, '/mediapipe/wrist_3d', 10)
+
+        # Inicializa a conversão entre ROS e OpenCV
         self.bridge = CvBridge()
 
-        # Subscrição ao tópico de imagem de profundidade
-        self.depth_subscription = self.create_subscription(
-            Image,
-            '/camera/camera/depth/image_rect_raw',
-            self.depth_callback,
-            10
+        # Inicializa o MediaPipe Pose
+        self.mp_pose = mp.solutions.pose
+        self.pose = self.mp_pose.Pose(
+            static_image_mode=False,
+            model_complexity=1,
+            smooth_landmarks=True,
+            enable_segmentation=False,
+            min_detection_confidence=0.5,
+            min_tracking_confidence=0.5
         )
 
-        # Subscrição ao tópico de coordenadas 2D do pulso
-        self.wrist_subscription = self.create_subscription(
-            Pose2D,
-            '/blazepose/right_wrist_2d',
-            self.wrist_callback,
-            10
-        )
+        # Índice do landmark do punho direito
+        self.idx_wrist = self.mp_pose.PoseLandmark.RIGHT_WRIST.value
 
-        # Variáveis para armazenar a última imagem de profundidade e seu encoding
-        self.latest_depth_image = None
-        self.depth_encoding = None
-        self.depth_lock = threading.Lock()
+        # Buffer para suavização (opcional)
+        self.wrist_history = deque(maxlen=5)
 
-        # Variável para armazenar a última posição válida do pulso
-        self.last_valid_point = None
-        self.point_lock = threading.Lock()
+        self.get_logger().info("MediapipeWrist3DNode inicializado.")
 
-        # Publicador para publicar a posição 3D do pulso
-        self.pub_wrist_3d = self.create_publisher(
-            Point,
-            '/blazepose/right_wrist_3d',
-            10
-        )
-
-        # Timer para publicar periodicamente a última posição válida
-        timer_period = 0.1  # segundos (10 Hz)
-        self.timer = self.create_timer(timer_period, self.publish_last_point)
-
-        # Variável para controlar a frequência dos logs
-        self.last_log_time = time.time()
-        self.log_interval = 1.0  # Segundos entre os logs de coordenadas
-
-        self.get_logger().info("DepthWristSubscriber inicializado!")
-
-    def depth_callback(self, msg):
-        """Callback para a imagem de profundidade."""
+    def image_callback(self, msg: Image):
         try:
-            # Converte a mensagem ROS Image em um array NumPy
-            depth_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding='passthrough')
-
-            # Protege o acesso à imagem com uma trava
-            with self.depth_lock:
-                self.latest_depth_image = depth_image
-                self.depth_encoding = msg.encoding
-
-            self.get_logger().debug("Imagem de profundidade atualizada.")
+            # Converte a imagem ROS para OpenCV (BGR)
+            frame_bgr = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
         except Exception as e:
-            self.get_logger().error(f"Erro ao converter imagem de profundidade: {e}")
+            self.get_logger().error(f"Erro ao converter a imagem: {e}")
+            return
 
-    def wrist_callback(self, msg):
-        """Callback para as coordenadas 2D do pulso."""
-        try:
-            # Obtém as coordenadas 2D do pulso em milímetros
-            u_mm = float(msg.x)  # Em milímetros
-            v_mm = float(msg.y)  # Em milímetros
-            self.get_logger().debug(f"Coordenadas 2D do pulso recebidas: (x={u_mm} mm, y={v_mm} mm)")
+        # Converte BGR para RGB para o MediaPipe
+        frame_rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
 
-            # Converte as coordenadas de milímetros para metros
-            u_m = u_mm / 1000.0
-            v_m = v_mm / 1000.0
+        # Processa a imagem com o MediaPipe Pose
+        results = self.pose.process(frame_rgb)
 
-            # Acessa a última imagem de profundidade de forma segura
-            with self.depth_lock:
-                if self.latest_depth_image is None:
-                    self.get_logger().warn("Imagem de profundidade ainda não recebida.")
-                    return
-                depth_image = self.latest_depth_image.copy()
-                encoding = self.depth_encoding
+        if not results.pose_landmarks:
+            self.get_logger().info("Nenhuma pose detectada.")
+            return
 
-            height, width = depth_image.shape[:2]
+        # Tenta usar os world landmarks (mais precisos para coordenadas 3D)
+        if results.pose_world_landmarks:
+            wrist_landmark = results.pose_world_landmarks.landmark[self.idx_wrist]
+            # As coordenadas já estão em metros
+            wrist_3d = np.array([wrist_landmark.x, wrist_landmark.y, wrist_landmark.z])
+        else:
+            # Fallback: usa os landmarks normalizados (não ideal para 3D)
+            self.get_logger().warn("World landmarks não disponíveis, usando landmarks normalizados!")
+            wrist_landmark = results.pose_landmarks.landmark[self.idx_wrist]
+            # Aqui os valores de x e y estão normalizados e z é relativo (não em metros)
+            wrist_3d = np.array([wrist_landmark.x, wrist_landmark.y, wrist_landmark.z])
 
-            # Verifica se as coordenadas estão dentro dos limites da imagem
-            if u_mm < 0 or u_mm >= width or v_mm < 0 or v_mm >= height:
-                # Removido o log de aviso
-                return
+        # Suaviza a posição usando um histórico (opcional)
+        self.wrist_history.append(wrist_3d)
+        smoothed_wrist = np.mean(self.wrist_history, axis=0)
 
-            # Lê o valor de profundidade na posição (u, v)
-            depth_value = depth_image[int(v_mm), int(u_mm)]
+        # Prepara a mensagem PointStamped com a posição 3D do punho
+        point_msg = PointStamped()
+        point_msg.header.stamp = self.get_clock().now().to_msg()
+        # Escolha o frame adequado; se for necessário transformar para o frame da câmera,
+        # aplique aqui a transformação fixa/calibração
+        point_msg.header.frame_id = "camera_color_optical_frame"
+        point_msg.point.x = float(smoothed_wrist[0])
+        point_msg.point.y = float(smoothed_wrist[1])
+        point_msg.point.z = float(smoothed_wrist[2])
 
-            # Ignora profundidade inválida (0.0)
-            if depth_value == 0.0:
-                self.get_logger().warn(f"Valor de profundidade inválido detectado em (x={u_mm} mm, y={v_mm} mm). Mantendo última posição válida.")
-                return
+        self.pub_wrist_3d.publish(point_msg)
 
-            # Converte a profundidade para metros
-            if encoding == '16UC1':
-                depth_in_m = float(depth_value) / 1000.0  # Converte de milímetros para metros
-            elif encoding == '32FC1':
-                depth_in_m = float(depth_value)  # Assumindo que já está em metros
-            else:
-                self.get_logger().warn(f"Encoding de profundidade desconhecido: {encoding}")
-                return
-
-            # Atualiza os logs a cada intervalo definido
-            current_time = time.time()
-            if current_time - self.last_log_time >= self.log_interval:
-                self.get_logger().info(f"Coordenadas 3D do pulso atualizadas: x={u_m:.3f} m, y={v_m:.3f} m, z={depth_in_m:.3f} m")
-                self.last_log_time = current_time
-
-            # Cria a mensagem Point com as coordenadas 3D do pulso em metros
-            wrist_pose_3d = Point()
-            wrist_pose_3d.x = u_m
-            wrist_pose_3d.y = v_m
-            wrist_pose_3d.z = depth_in_m
-
-            # Atualiza a última posição válida
-            with self.point_lock:
-                self.last_valid_point = wrist_pose_3d
-
-            self.get_logger().debug(f"Atualizada última posição válida do pulso: x={wrist_pose_3d.x:.3f} m, y={wrist_pose_3d.y:.3f} m, z={wrist_pose_3d.z:.3f} m")
-        except Exception as e:
-            self.get_logger().error(f"Erro ao processar as coordenadas do pulso: {e}")
-
-    def publish_last_point(self):
-        """Publica a última posição válida do pulso."""
-        with self.point_lock:
-            if self.last_valid_point is not None:
-                self.pub_wrist_3d.publish(self.last_valid_point)
-                self.get_logger().info(
-                    f"Publicando última posição válida do pulso: "
-                    f"x={self.last_valid_point.x:.3f} m, y={self.last_valid_point.y:.3f} m, z={self.last_valid_point.z:.3f} m"
-                )
-            else:
-                self.get_logger().debug("Nenhuma posição válida para publicar ainda.")
+        self.get_logger().info(
+            f"Wrist 3D publicado: x={smoothed_wrist[0]:.3f}, y={smoothed_wrist[1]:.3f}, z={smoothed_wrist[2]:.3f}"
+        )
 
 def main(args=None):
     rclpy.init(args=args)
-    node = DepthWristSubscriber()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
+    node = MediapipeWrist3DNode()
+    rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
 
