@@ -176,6 +176,9 @@ class BlazePoseRightArm3DNode(Node):
             self.get_logger().error(f"Formato não suportado: {depth_msg.encoding}")
             return
 
+        # Log the raw depth value
+        self.get_logger().info(f"Profundidade Bruta (m): {depth_value:.3f}")
+
         if depth_value <= 0.05 or depth_value > 5.0:  # Agora permite até 5m
             self.get_logger().warn(f"Invalid depth ({depth_value:.2f}m) at ({u},{v}). Skipping...")
             return

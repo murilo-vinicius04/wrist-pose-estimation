@@ -27,20 +27,36 @@ def generate_launch_description():
             }.items()
         ),
 
-        # # 🦾 Visualizador do braço direito
-        # Node(
-        #     package='blazepose_right_arm_3d',
-        #     executable='right_arm_viewer',
-        #     name='right_arm_viewer_node',
-        #     output='screen'
-        # ),
-
-        # Novo nó blazepose_3d
+        # 🦾 Visualizador do braço direito
         Node(
             package='blazepose_right_arm_3d',
-            executable='blazepose_3d',
-            name='blazepose_3d_node',
+            executable='right_arm_viewer',
+            name='right_arm_viewer_node',
             output='screen'
         ),
 
+
+        # Novo nó pointcloud_test
+        Node(
+            package='blazepose_right_arm_3d',
+            executable='pointcloud_test',
+            name='pointcloud_test_node',
+            output='screen'
+        ),
+
+        # Novo nó aruco_tf_node
+        Node(
+            package='blazepose_right_arm_3d',
+            executable='aruco_tf_node',
+            name='aruco_tf_node',
+            output='screen'
+        ),
+
+        # Novo nó wrist_transform_node
+        Node(
+            package='blazepose_right_arm_3d',
+            executable='wrist_transform_node',
+            name='wrist_transform_node',
+            output='screen'
+        ),
     ])

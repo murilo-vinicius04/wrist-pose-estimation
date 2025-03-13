@@ -27,10 +27,17 @@ class WristTransformNode(Node):
     
     def listener_callback(self, msg: PointStamped):
         try:
-            # Attempt to transform msg to the 'base' frame
+            # Transformar o ponto para o frame 'base'
             transform = self.tf_buffer.transform(msg, 'base', timeout=rclpy.duration.Duration(seconds=1.0))
             self.publisher.publish(transform)
-            self.get_logger().info('Published transformed wrist position.')
+            
+            # Verificar se o pulso está próximo da origem (tolerância de 0.05[m])
+            tolerance = 0.05
+            x, y, z = transform.point.x, transform.point.y, transform.point.z
+            if abs(x) < tolerance and abs(y) < tolerance and abs(z) < tolerance:
+                self.get_logger().info(f"ORIGEM DETECTADA: ({x:.3f}, {y:.3f}, {z:.3f})")
+            else:
+                self.get_logger().info(f"Posição atual: ({x:.3f}, {y:.3f}, {z:.3f})")
         except Exception as e:
             self.get_logger().warn(f'Transform failed: {e}')
             

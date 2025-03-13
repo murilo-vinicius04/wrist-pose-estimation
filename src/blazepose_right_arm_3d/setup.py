@@ -25,9 +25,10 @@ setup(
             'blazepose_node = blazepose_right_arm_3d.blazepose_right_arm_3d_node:main',
             'pointcloud_test = blazepose_right_arm_3d.pointcloud_test:main',
             'right_arm_viewer = blazepose_right_arm_3d.right_arm_viewer:main',
-            'wrist_transform_node = blazepose_right_arm_3d.tf2:main',
             'blazepose_3d = blazepose_right_arm_3d.blazepose_map3d:main',
             'calibration_node = blazepose_right_arm_3d.calibration:main',
+            'aruco_tf_node = blazepose_right_arm_3d.aruco_tf_node:main',
+            'wrist_transform_node = blazepose_right_arm_3d.wrist_to_aruco:main',
         ],
     },
 )

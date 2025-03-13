@@ -76,18 +76,15 @@ class MediapipeWrist3DNode(Node):
             # Fallback: usa os landmarks normalizados (não ideal para 3D)
             self.get_logger().warn("World landmarks não disponíveis, usando landmarks normalizados!")
             wrist_landmark = results.pose_landmarks.landmark[self.idx_wrist]
-            # Aqui os valores de x e y estão normalizados e z é relativo (não em metros)
             wrist_3d = np.array([wrist_landmark.x, wrist_landmark.y, wrist_landmark.z])
 
         # Suaviza a posição usando um histórico (opcional)
         self.wrist_history.append(wrist_3d)
         smoothed_wrist = np.mean(self.wrist_history, axis=0)
 
-        # Prepara a mensagem PointStamped com a posição 3D do punho
+        # Prepara a mensagem PointStamped com a posição 3D do punho (na frame da câmera)
         point_msg = PointStamped()
         point_msg.header.stamp = self.get_clock().now().to_msg()
-        # Escolha o frame adequado; se for necessário transformar para o frame da câmera,
-        # aplique aqui a transformação fixa/calibração
         point_msg.header.frame_id = "camera_color_optical_frame"
         point_msg.point.x = float(smoothed_wrist[0])
         point_msg.point.y = float(smoothed_wrist[1])
