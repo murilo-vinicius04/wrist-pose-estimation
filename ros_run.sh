@@ -14,16 +14,20 @@ if ! command -v nvidia-smi &>/dev/null; then
     exit 1
 fi
 
-# Lista de dispositivos de câmera esperados (por exemplo: /dev/video2 a /dev/video7)
+# Detectar automaticamente TODOS os dispositivos de câmera disponíveis
+echo "Detectando dispositivos de câmera disponíveis..."
 camera_devices=()
-for video in {2..7}; do
-    device="/dev/video${video}"
+for device in /dev/video*; do
     if [ -e "$device" ]; then
+        echo "Encontrado: $device"
         camera_devices+=(--device="${device}:${device}")
-    else
-        echo "Aviso: dispositivo ${device} não encontrado. O nó da câmera pode não funcionar corretamente."
     fi
 done
+
+# Se nenhum dispositivo for encontrado, avisar o usuário
+if [ ${#camera_devices[@]} -eq 0 ]; then
+    echo "Atenção: Nenhum dispositivo de câmera foi encontrado!"
+fi
 
 # Executar o container com mapeamento de GPU, display, volumes e dispositivos USB/câmera (se existirem)
 docker run -it --rm \
