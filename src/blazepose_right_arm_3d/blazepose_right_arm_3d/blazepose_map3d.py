@@ -122,7 +122,7 @@ class BlazePoseRightArm3DNode(Node):
         # Process with MediaPipe Pose
         results = self.pose.process(frame_rgb)
         if not results.pose_landmarks:
-            self.get_logger().warn("⚠️ Nenhuma pose detectada! Verifique a câmera e o posicionamento.")
+            self.get_logger().warn("Nenhuma pose detectada! Verifique a câmera e o posicionamento.")
             return
 
         # Extract wrist coordinates in pixel space
@@ -134,7 +134,7 @@ class BlazePoseRightArm3DNode(Node):
         u = int(wrist_landmark.x * color_w)
         v = int(wrist_landmark.y * color_h)
 
-        self.get_logger().info(f"✅ Pulso detectado: u={u}, v={v}")
+        self.get_logger().info(f"Pulso detectado: u={u}, v={v}")
 
         # Publish 2D wrist coordinates (Pose2D)
         wrist_pose_2d = Pose2D()

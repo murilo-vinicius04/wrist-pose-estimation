@@ -67,16 +67,23 @@ class MediapipeWrist3DNode(Node):
             self.get_logger().info("Nenhuma pose detectada.")
             return
 
-        # Tenta usar os world landmarks (mais precisos para coordenadas 3D)
-        if results.pose_world_landmarks:
-            wrist_landmark = results.pose_world_landmarks.landmark[self.idx_wrist]
-            # As coordenadas já estão em metros
-            wrist_3d = np.array([wrist_landmark.x, wrist_landmark.y, wrist_landmark.z])
-        else:
-            # Fallback: usa os landmarks normalizados (não ideal para 3D)
-            self.get_logger().warn("World landmarks não disponíveis, usando landmarks normalizados!")
-            wrist_landmark = results.pose_landmarks.landmark[self.idx_wrist]
-            wrist_3d = np.array([wrist_landmark.x, wrist_landmark.y, wrist_landmark.z])
+        # Encontra a pessoa mais próxima da câmera
+        closest_person_idx = None
+        min_depth = float('inf')
+        for idx, landmark in enumerate(results.pose_world_landmarks.landmark):
+            if landmark.visibility > 0.5 and landmark.z < min_depth:
+                min_depth = landmark.z
+                closest_person_idx = idx
+
+        if closest_person_idx is None:
+            self.get_logger().info("Nenhuma pessoa próxima detectada.")
+            return
+
+        # Índice do landmark do punho direito da pessoa mais próxima
+        wrist_landmark = results.pose_world_landmarks.landmark[self.idx_wrist]
+
+        # As coordenadas já estão em metros
+        wrist_3d = np.array([wrist_landmark.x, wrist_landmark.y, wrist_landmark.z])
 
         # Suaviza a posição usando um histórico (opcional)
         self.wrist_history.append(wrist_3d)
@@ -86,9 +93,10 @@ class MediapipeWrist3DNode(Node):
         point_msg = PointStamped()
         point_msg.header.stamp = self.get_clock().now().to_msg()
         point_msg.header.frame_id = "camera_color_optical_frame"
-        point_msg.point.x = float(smoothed_wrist[0])
-        point_msg.point.y = float(smoothed_wrist[1])
-        point_msg.point.z = float(smoothed_wrist[2])
+        # Permuta os eixos do MediaPipe pro padrão REP 103 do ROS
+        point_msg.point.x = float(smoothed_wrist[2])  # Z do MediaPipe vira X do ROS (profundidade → frente)
+        point_msg.point.y = float(-smoothed_wrist[0])  # -X do MediaPipe vira Y do ROS (direita → esquerda)
+        point_msg.point.z = float(-smoothed_wrist[1])  # -Y do MediaPipe vira Z do ROS (baixo → cima)
 
         self.pub_wrist_3d.publish(point_msg)
 
