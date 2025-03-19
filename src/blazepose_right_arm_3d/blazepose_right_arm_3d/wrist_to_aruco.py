@@ -19,7 +19,7 @@ class WristTransformer(Node):
         # Subscrição para a posição do pulso no frame da câmera
         self.wrist_sub = self.create_subscription(
             PointStamped,
-            '/mediapipe/wrist_3d',
+            '/blazepose/right_wrist_3d',
             self.wrist_callback,
             10
         )

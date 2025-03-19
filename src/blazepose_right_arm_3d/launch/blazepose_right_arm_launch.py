@@ -44,19 +44,27 @@ def generate_launch_description():
             output='screen'
         ),
 
-        # Novo nó aruco_tf_node
-        Node(
-            package='blazepose_right_arm_3d',
-            executable='aruco_tf_node',
-            name='aruco_tf_node',
-            output='screen'
-        ),
+        # # Novo nó aruco_tf_node
+        # Node(
+        #     package='blazepose_right_arm_3d',
+        #     executable='aruco_tf_node',
+        #     name='aruco_tf_node',
+        #     output='screen'
+        # ),
 
-        # Novo nó wrist_transform_node
-        Node(
-            package='blazepose_right_arm_3d',
-            executable='wrist_transform_node',
-            name='wrist_transform_node',
-            output='screen'
-        ),
+        # # Novo nó wrist_transform_node
+        # Node(
+        #     package='blazepose_right_arm_3d',
+        #     executable='wrist_transform_node',
+        #     name='wrist_transform_node',
+        #     output='screen'
+        # ),
+
+        # # Novo nó blazepose_map3d
+        # Node(
+        #     package='blazepose_right_arm_3d',
+        #     executable='blazepose_3d',
+        #     name='blazepose_map3d_node',
+        #     output='screen'
+        # ),
     ])

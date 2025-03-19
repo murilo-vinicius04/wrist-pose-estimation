@@ -84,7 +84,13 @@ class BlazePoseRightArm3DNode(Node):
         # BlazePose index for the right wrist landmark
         self.idx_wrist = self.mp_pose.PoseLandmark.RIGHT_WRIST.value
 
-        self.wrist_history = deque(maxlen=3)  # Reduz o atraso, mantendo alguma suavização
+        self.wrist_history = deque(maxlen=7)  # Increased from 3 to 7
+        
+        # Add a buffer to store depth history
+        self.depth_history = deque(maxlen=10)
+        
+        # Constants for outlier filtering
+        self.MAX_DEPTH_CHANGE = 0.3  # meters - maximum allowed change between frames
 
         self.get_logger().info("BlazePoseRightArm3DNode initialized.")
 
@@ -155,34 +161,58 @@ class BlazePoseRightArm3DNode(Node):
         u = int(np.clip(u, 0, depth_w - 1))
         v = int(np.clip(v, 0, depth_h - 1))
 
-        # Garantir acesso seguro à janela 3x3
-        u_min = max(0, u-1)
-        u_max = min(depth_w, u+2)
-        v_min = max(0, v-1)
-        v_max = min(depth_h, v+2)
+        # Increase the search window to 7x7 pixels
+        window_size = 7
+        half_window = window_size // 2
+        
+        u_min = max(0, u - half_window)
+        u_max = min(depth_w, u + half_window + 1)
+        v_min = max(0, v - half_window)
+        v_max = min(depth_h, v + half_window + 1)
+        
         depth_window = depth_image[v_min:v_max, u_min:u_max]
 
-        # Retrieve the depth (in meters) at the wrist's pixel (u, v)
-        valid_pixels = depth_window[depth_window > 0]
+        # Filter valid values (within practical operating range for wrist tracking)
+        valid_pixels = depth_window[(depth_window >= 300) & (depth_window <= 1500)]
+        
         if valid_pixels.size == 0:
             self.get_logger().warn(f"No valid depth found at ({u},{v}), skipping frame...")
             return
 
+        # Use median instead of mean for robustness to outliers
         if depth_msg.encoding == '16UC1':
-            depth_value = np.mean(valid_pixels) * 0.001  # mm para metros
+            depth_value = np.median(valid_pixels) * 0.001  # mm to meters
         elif depth_msg.encoding == '32FC1':
-            depth_value = np.mean(valid_pixels)  # já está em metros
+            depth_value = np.median(valid_pixels)  # already in meters
         else:
-            self.get_logger().error(f"Formato não suportado: {depth_msg.encoding}")
+            self.get_logger().error(f"Unsupported format: {depth_msg.encoding}")
             return
 
         # Log the raw depth value
-        self.get_logger().info(f"Profundidade Bruta (m): {depth_value:.3f}")
-
-        if depth_value <= 0.05 or depth_value > 5.0:  # Agora permite até 5m
-            self.get_logger().warn(f"Invalid depth ({depth_value:.2f}m) at ({u},{v}). Skipping...")
+        self.get_logger().info(f"Raw Depth (m): {depth_value:.3f}")
+        
+        # Check if depth is within reasonable limits
+        if depth_value <= 0.05 or depth_value > 3.0:
+            self.get_logger().warn(f"Depth out of bounds ({depth_value:.2f}m), skipping...")
             return
-
+        
+        # Temporal filter: check for large jumps in depth
+        if len(self.depth_history) > 0:
+            last_depth = self.depth_history[-1]
+            if abs(depth_value - last_depth) > self.MAX_DEPTH_CHANGE:
+                self.get_logger().warn(f"Depth jump detected: {last_depth:.2f}m -> {depth_value:.2f}m")
+                
+                # Option 2: Limit the maximum variation (more gradual)
+                if depth_value > last_depth:
+                    depth_value = last_depth + self.MAX_DEPTH_CHANGE
+                else:
+                    depth_value = last_depth - self.MAX_DEPTH_CHANGE
+                    
+                self.get_logger().info(f"Depth adjusted to: {depth_value:.3f}m")
+        
+        # Store the depth value in the history buffer
+        self.depth_history.append(depth_value)
+        
         # Deproject the 2D pixel + depth to 3D coordinates
         wrist_3d = rs.rs2_deproject_pixel_to_point(
             self.color_intrinsics,
@@ -190,20 +220,19 @@ class BlazePoseRightArm3DNode(Node):
             depth_value
         )
 
-        # Adiciona a nova posição ao buffer de histórico
+        # Add the new position to the history buffer
         self.wrist_history.append(wrist_3d)
 
-        # Calcula a média ponderada das últimas posições
-        weights = np.linspace(1, 2, len(self.wrist_history))  # Pesos crescentes
-        weights /= np.sum(weights)  # Normaliza os pesos
-        wrist_smoothed = np.average(self.wrist_history, axis=0, weights=weights)
-
+        # Compute the median of the last positions for each coordinate X, Y, Z
+        wrist_array = np.array(self.wrist_history)
+        wrist_smoothed = np.median(wrist_array, axis=0)
+        
         # Publish the 3D coordinate as PointStamped
         wrist_point_msg = PointStamped()
         wrist_point_msg.header.stamp = self.get_clock().now().to_msg()
         wrist_point_msg.header.frame_id = "camera_color_optical_frame"  # Correto após alinhamento
         wrist_point_msg.point.x = float(wrist_smoothed[0])
-        wrist_point_msg.point.y = float(wrist_smoothed[1])
+        wrist_point_msg.point.y = float(wrist_smoaothed[1])
         wrist_point_msg.point.z = float(wrist_smoothed[2])
 
         self.pub_right_wrist_3d.publish(wrist_point_msg)
